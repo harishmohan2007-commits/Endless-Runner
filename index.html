@@ -17,38 +17,25 @@
 
 <body>
 
-<div class="container">
+<div class="homeContainer">
 
 <h1 class="title">AntiGravity Runner</h1>
-<p class="subtitle">Press SPACE to Jump</p>
 
-<div class="uiBar">
+<p class="subtitle">Defy gravity. Test your reflexes.</p>
 
-<button id="pauseBtn">Pause</button> <button id="restartBtn">Restart</button>
-
-<div class="scoreBoard">
-Score : <span id="score">0</span>
-</div>
+<button class="playButton" onclick="startGame()">PLAY</button>
 
 </div>
 
-<canvas id="gameCanvas" width="1000" height="400"></canvas>
+<script>
 
-</div>
+function startGame(){
 
-<!-- GAME OVER SCREEN -->
+window.location.href = "game.html";
 
-<div id="gameOverScreen" class="gameOver">
+}
 
-<h2>Game Over</h2>
-
-<p>Your Score: <span id="finalScore">0</span></p>
-
-<button id="playAgain">Play Again</button>
-
-</div>
-
-<script src="game.js"></script>
+</script>
 
 </body>
 
