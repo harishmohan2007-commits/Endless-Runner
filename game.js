@@ -22,23 +22,34 @@ let gameOver=false;
 let player={
 x:120,
 y:300,
-width:40,
-height:40,
+width:60,
+height:60,
 vy:0,
 jump:false
 };
 
 let obstacles=[];
 let coins=[];
-let stars=[];
 
-for(let i=0;i<120;i++){
-stars.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*2
-});
-}
+let bg1x=0;
+let bg2x=0;
+
+const playerSprite=new Image();
+playerSprite.src="assets/runner.png";
+
+const bg1=new Image();
+bg1.src="assets/bg1.png";
+
+const bg2=new Image();
+bg2.src="assets/bg2.png";
+
+const jumpSound=new Audio("assets/jump.mp3");
+const coinSound=new Audio("assets/coin.mp3");
+const music=new Audio("assets/music.mp3");
+
+music.loop=true;
+music.volume=0.3;
+music.play();
 
 document.addEventListener("keydown",jump);
 document.addEventListener("touchstart",jump);
@@ -50,11 +61,13 @@ if((e.code==="Space"||e.type==="touchstart")&&!player.jump&&!paused&&!gameOver){
 player.vy=-14;
 player.jump=true;
 
-}
+jumpSound.play();
 
 }
 
-pauseBtn.onclick=function(){
+}
+
+pauseBtn.onclick=()=>{
 
 paused=!paused;
 
@@ -62,17 +75,9 @@ pauseBtn.innerText=paused?"Resume":"Pause";
 
 };
 
-restartBtn.onclick=function(){
-location.reload();
-};
-
-homeBtn.onclick=function(){
-window.location.href="index.html";
-};
-
-playAgainBtn.onclick=function(){
-location.reload();
-};
+restartBtn.onclick=()=>location.reload();
+homeBtn.onclick=()=>window.location.href="index.html";
+playAgainBtn.onclick=()=>location.reload();
 
 function spawnObjects(){
 
@@ -164,6 +169,8 @@ player.y+player.height>c.y
 
 score+=5;
 
+coinSound.play();
+
 coins.splice(i,1);
 
 }
@@ -173,21 +180,11 @@ coins.splice(i,1);
 score+=0.05;
 scoreDisplay.innerText=Math.floor(score);
 
-}
+bg1x-=2;
+bg2x-=4;
 
-function drawStars(){
-
-ctx.fillStyle="white";
-
-stars.forEach(star=>{
-
-ctx.fillRect(star.x,star.y,star.size,star.size);
-
-star.x-=0.5;
-
-if(star.x<0) star.x=canvas.width;
-
-});
+if(bg1x<=-canvas.width)bg1x=0;
+if(bg2x<=-canvas.width)bg2x=0;
 
 }
 
@@ -195,39 +192,28 @@ function draw(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
-drawStars();
+ctx.drawImage(bg1,bg1x,0,canvas.width,400);
+ctx.drawImage(bg1,bg1x+canvas.width,0,canvas.width,400);
+
+ctx.drawImage(bg2,bg2x,0,canvas.width,400);
+ctx.drawImage(bg2,bg2x+canvas.width,0,canvas.width,400);
 
 ctx.fillStyle="#1e293b";
 ctx.fillRect(0,350,1000,50);
 
-let gradient=ctx.createLinearGradient(player.x,0,player.x+40,0);
-
-gradient.addColorStop(0,"#8b5cf6");
-gradient.addColorStop(1,"#38bdf8");
-
-ctx.fillStyle=gradient;
-ctx.fillRect(player.x,player.y,player.width,player.height);
-
-ctx.shadowColor="#38bdf8";
-ctx.shadowBlur=15;
+ctx.drawImage(playerSprite,player.x,player.y,player.width,player.height);
 
 obstacles.forEach(o=>{
-
 ctx.fillStyle="#38bdf8";
 ctx.fillRect(o.x,o.y,o.width,o.height);
-
 });
 
 coins.forEach(c=>{
-
 ctx.fillStyle="gold";
 ctx.beginPath();
 ctx.arc(c.x,c.y,c.size,0,Math.PI*2);
 ctx.fill();
-
 });
-
-ctx.shadowBlur=0;
 
 }
 
