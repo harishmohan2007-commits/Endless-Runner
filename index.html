@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -21,22 +20,24 @@
 
 <h1 class="title">AntiGravity Runner</h1>
 
-<p class="subtitle">Defy gravity. Test your reflexes.</p>
+<p class="subtitle">Defy gravity. Survive the longest.</p>
 
 <button class="playButton" onclick="startGame()">PLAY GAME</button>
+
+<p class="highScoreText">High Score: <span id="homeHighScore">0</span></p>
 
 </div>
 
 <script>
 
 function startGame(){
-
-window.location.href = "game.html";
-
+window.location.href="game.html";
 }
+
+let savedScore = localStorage.getItem("highscore") || 0;
+document.getElementById("homeHighScore").innerText = savedScore;
 
 </script>
 
 </body>
-
 </html>
