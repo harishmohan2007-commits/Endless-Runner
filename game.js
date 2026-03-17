@@ -1,32 +1,44 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-let scoreEl = document.getElementById("score");
+const scoreDisplay = document.getElementById("score");
+
+let score = 0;
+
+let gravity = 0.7;
 
 let player = {
-x:80,
-y:260,
+
+x:120,
+y:300,
+
 width:40,
 height:40,
+
 vy:0,
+
 jump:false
+
 };
 
 let obstacle = {
-x:900,
-y:270,
+
+x:1000,
+y:310,
+
 width:30,
 height:30
+
 };
 
-let gravity = 0.7;
-let score = 0;
-
-document.addEventListener("keydown", e => {
+document.addEventListener("keydown", function(e){
 
 if(e.code === "Space" && !player.jump){
-player.vy = -13;
+
+player.vy = -14;
+
 player.jump = true;
+
 }
 
 });
@@ -34,29 +46,45 @@ player.jump = true;
 function update(){
 
 player.vy += gravity;
+
 player.y += player.vy;
 
-if(player.y >= 260){
-player.y = 260;
+if(player.y >= 300){
+
+player.y = 300;
+
 player.jump = false;
+
 }
 
-obstacle.x -= 7;
+obstacle.x -= 8;
 
 if(obstacle.x < -30){
-obstacle.x = 900;
+
+obstacle.x = 1000;
+
 score++;
-scoreEl.innerText = score;
+
+scoreDisplay.innerText = score;
+
 }
 
 if(
+
 player.x < obstacle.x + obstacle.width &&
+
 player.x + player.width > obstacle.x &&
+
 player.y < obstacle.y + obstacle.height &&
+
 player.y + player.height > obstacle.y
+
 ){
-alert("Game Over\nScore: "+score);
+
+alert("Game Over! Score: " + score);
+
 location.reload();
+
 }
 
 }
@@ -66,19 +94,25 @@ function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
 ctx.fillStyle="#1e293b";
-ctx.fillRect(0,300,900,50);
 
-let gradient = ctx.createLinearGradient(player.x,0,player.x+40,0);
-gradient.addColorStop(0,"#8b5cf6");
-gradient.addColorStop(1,"#38bdf8");
+ctx.fillRect(0,350,1000,50);
 
-ctx.fillStyle = gradient;
+let playerGradient = ctx.createLinearGradient(player.x,0,player.x+40,0);
+
+playerGradient.addColorStop(0,"#8b5cf6");
+
+playerGradient.addColorStop(1,"#38bdf8");
+
+ctx.fillStyle = playerGradient;
+
 ctx.fillRect(player.x,player.y,player.width,player.height);
 
 ctx.shadowColor="#38bdf8";
+
 ctx.shadowBlur=15;
 
 ctx.fillStyle="#38bdf8";
+
 ctx.fillRect(obstacle.x,obstacle.y,obstacle.width,obstacle.height);
 
 ctx.shadowBlur=0;
@@ -86,9 +120,13 @@ ctx.shadowBlur=0;
 }
 
 function gameLoop(){
+
 update();
+
 draw();
+
 requestAnimationFrame(gameLoop);
+
 }
 
 gameLoop();
