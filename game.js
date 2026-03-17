@@ -24,12 +24,17 @@ vy:0,
 jump:false
 };
 
-let obstacle = {
-x:1000,
-y:310,
-width:30,
-height:30
-};
+let obstacles = [];
+
+let stars = [];
+
+for(let i=0;i<120;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2
+});
+}
 
 document.addEventListener("keydown", function(e){
 
@@ -60,9 +65,28 @@ location.reload();
 
 };
 
+function spawnObstacle(){
+
+if(Math.random() < 0.02){
+
+obstacles.push({
+
+x:canvas.width,
+y:310,
+width:30,
+height:30
+
+});
+
+}
+
+}
+
 function update(){
 
 if(paused || gameOver) return;
+
+let speed = 8 + score * 0.25;
 
 player.vy += gravity;
 player.y += player.vy;
@@ -72,25 +96,21 @@ player.y = 300;
 player.jump = false;
 }
 
-obstacle.x -= 8;
+spawnObstacle();
 
-if(obstacle.x < -30){
+obstacles.forEach(obstacle=>{
+obstacle.x -= speed;
+});
 
-obstacle.x = 1000;
+obstacles = obstacles.filter(obstacle => obstacle.x > -50);
 
-score++;
-
-scoreDisplay.innerText = score;
-
-}
+obstacles.forEach(obstacle=>{
 
 if(
-
 player.x < obstacle.x + obstacle.width &&
 player.x + player.width > obstacle.x &&
 player.y < obstacle.y + obstacle.height &&
 player.y + player.height > obstacle.y
-
 ){
 
 gameOver = true;
@@ -101,11 +121,37 @@ gameOverScreen.style.display = "flex";
 
 }
 
+});
+
+score += 0.05;
+
+scoreDisplay.innerText = Math.floor(score);
+
+}
+
+function drawStars(){
+
+ctx.fillStyle="white";
+
+stars.forEach(star=>{
+
+ctx.fillRect(star.x, star.y, star.size, star.size);
+
+star.x -= 0.5;
+
+if(star.x < 0){
+star.x = canvas.width;
+}
+
+});
+
 }
 
 function draw(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
+
+drawStars();
 
 ctx.fillStyle="#1e293b";
 ctx.fillRect(0,350,1000,50);
@@ -116,13 +162,19 @@ playerGradient.addColorStop(0,"#8b5cf6");
 playerGradient.addColorStop(1,"#38bdf8");
 
 ctx.fillStyle = playerGradient;
+
 ctx.fillRect(player.x,player.y,player.width,player.height);
 
 ctx.shadowColor="#38bdf8";
 ctx.shadowBlur=15;
 
+obstacles.forEach(obstacle=>{
+
 ctx.fillStyle="#38bdf8";
+
 ctx.fillRect(obstacle.x,obstacle.y,obstacle.width,obstacle.height);
+
+});
 
 ctx.shadowBlur=0;
 
