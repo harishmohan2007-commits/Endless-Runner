@@ -14,7 +14,9 @@ justify-content:center;
 align-items:center;
 }
 
-.container{
+/* HOME SCREEN */
+
+.homeContainer{
 text-align:center;
 }
 
@@ -29,18 +31,32 @@ margin-bottom:10px;
 
 .subtitle{
 opacity:0.7;
-margin-bottom:20px;
+margin-bottom:30px;
 }
 
-canvas{
-background: linear-gradient(180deg,#0f172a,#020617);
-border-radius:15px;
-box-shadow:0 0 40px rgba(56,189,248,0.25);
-}
-
-.scoreBoard{
+.playButton{
+padding:16px 45px;
 font-size:20px;
-color:#38bdf8;
+border:none;
+border-radius:10px;
+
+background:linear-gradient(90deg,#8b5cf6,#38bdf8);
+color:white;
+
+cursor:pointer;
+
+transition:0.2s;
+}
+
+.playButton:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px rgba(56,189,248,0.6);
+}
+
+/* GAME PAGE */
+
+.container{
+text-align:center;
 }
 
 /* UI BAR */
@@ -74,6 +90,21 @@ transform:scale(1.05);
 opacity:0.9;
 }
 
+/* CANVAS */
+
+canvas{
+background: linear-gradient(180deg,#0f172a,#020617);
+border-radius:15px;
+box-shadow:0 0 40px rgba(56,189,248,0.25);
+}
+
+/* SCORE */
+
+.scoreBoard{
+font-size:20px;
+color:#38bdf8;
+}
+
 /* GAME OVER SCREEN */
 
 .gameOver{
@@ -91,8 +122,6 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 
-font-family:'Poppins';
-
 z-index:100;
 }
 
@@ -108,42 +137,4 @@ font-size:18px;
 
 .gameOver button{
 margin-top:10px;
-}
-
-/* HOME SCREEN */
-
-.homeContainer{
-
-text-align:center;
-
-}
-
-.playButton{
-
-margin-top:30px;
-
-padding:15px 40px;
-
-font-size:20px;
-
-border:none;
-
-border-radius:10px;
-
-background:linear-gradient(90deg,#8b5cf6,#38bdf8);
-
-color:white;
-
-cursor:pointer;
-
-transition:0.2s;
-
-}
-
-.playButton:hover{
-
-transform:scale(1.1);
-
-box-shadow:0 0 25px rgba(56,189,248,0.5);
-
 }
