@@ -1,17 +1,34 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-<title>Endless Runner</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AntiGravity Runner</title>
+
 <link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<h1>Endless Runner Game</h1>
+<div class="game-container">
 
-<canvas id="gameCanvas" width="800" height="300"></canvas>
+<h1 class="title">AntiGravity Runner</h1>
+<p class="subtitle">Press SPACE to Jump</p>
+
+<canvas id="gameCanvas" width="900" height="350"></canvas>
+
+<div class="scoreBox">
+Score: <span id="score">0</span>
+</div>
+
+</div>
 
 <script src="game.js"></script>
 
 </body>
+
 </html>
