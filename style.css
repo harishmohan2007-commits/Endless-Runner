@@ -109,3 +109,41 @@ font-size:18px;
 .gameOver button{
 margin-top:10px;
 }
+
+/* HOME SCREEN */
+
+.homeContainer{
+
+text-align:center;
+
+}
+
+.playButton{
+
+margin-top:30px;
+
+padding:15px 40px;
+
+font-size:20px;
+
+border:none;
+
+border-radius:10px;
+
+background:linear-gradient(90deg,#8b5cf6,#38bdf8);
+
+color:white;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
+
+.playButton:hover{
+
+transform:scale(1.1);
+
+box-shadow:0 0 25px rgba(56,189,248,0.5);
+
+}
