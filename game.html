@@ -16,28 +16,51 @@
 
 <body>
 
-<div class="homeContainer">
+<div class="container">
 
 <h1 class="title">AntiGravity Runner</h1>
 
-<p class="subtitle">Defy gravity. Survive the longest.</p>
+<div class="uiBar">
 
-<button class="playButton" onclick="startGame()">PLAY GAME</button>
+<button id="homeBtn">Home</button>
 
-<p class="highScoreText">High Score: <span id="homeHighScore">0</span></p>
+<button id="pauseBtn">Pause</button>
+
+<button id="restartBtn">Restart</button>
+
+<div class="scoreBoard">
+Score : <span id="score">0</span>
+</div>
+
+</div>
+
+<canvas id="gameCanvas" width="1000" height="400"></canvas>
+
+</div>
+
+<div id="gameOverScreen" class="gameOver">
+
+<h2>Game Over</h2>
+
+<p>Score: <span id="finalScore"></span></p>
+
+<p>High Score: <span id="highScore"></span></p>
+
+<button id="playAgain">Play Again</button>
+
+<button onclick="goHome()">Home</button>
 
 </div>
 
 <script>
 
-function startGame(){
-window.location.href="game.html";
+function goHome(){
+window.location.href="index.html";
 }
 
-let savedScore = localStorage.getItem("highscore") || 0;
-document.getElementById("homeHighScore").innerText = savedScore;
-
 </script>
+
+<script src="game.js"></script>
 
 </body>
 </html>
