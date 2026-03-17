@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AntiGravity Runner - Game</title>
+<title>AntiGravity Runner</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,40 +16,28 @@
 
 <body>
 
-<div class="container">
+<div class="homeContainer">
 
 <h1 class="title">AntiGravity Runner</h1>
 
-<div class="uiBar">
+<p class="subtitle">Defy gravity. Survive the longest.</p>
 
-<button id="pauseBtn">Pause</button>
+<button class="playButton" onclick="startGame()">PLAY GAME</button>
 
-<button id="restartBtn">Restart</button>
-
-<div class="scoreBoard">
-Score : <span id="score">0</span>
-</div>
+<p class="highScoreText">High Score: <span id="homeHighScore">0</span></p>
 
 </div>
 
-<canvas id="gameCanvas" width="1000" height="400"></canvas>
+<script>
 
-</div>
+function startGame(){
+window.location.href="game.html";
+}
 
-<!-- GAME OVER SCREEN -->
+let savedScore = localStorage.getItem("highscore") || 0;
+document.getElementById("homeHighScore").innerText = savedScore;
 
-<div id="gameOverScreen" class="gameOver">
-
-<h2>Game Over</h2>
-
-<p>Your Score: <span id="finalScore">0</span></p>
-
-<button id="playAgain">Play Again</button>
-
-</div>
-
-<script src="game.js"></script>
+</script>
 
 </body>
-
 </html>
