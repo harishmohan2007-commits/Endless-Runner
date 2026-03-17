@@ -2,7 +2,6 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const scoreDisplay = document.getElementById("score");
-
 const pauseBtn = document.getElementById("pauseBtn");
 const restartBtn = document.getElementById("restartBtn");
 
@@ -35,15 +34,13 @@ height:30
 document.addEventListener("keydown", function(e){
 
 if(e.code === "Space" && !player.jump && !paused && !gameOver){
-
 player.vy = -14;
 player.jump = true;
-
 }
 
 });
 
-pauseBtn.onclick = () => {
+pauseBtn.onclick = function(){
 
 paused = !paused;
 
@@ -51,13 +48,13 @@ pauseBtn.innerText = paused ? "Resume" : "Pause";
 
 };
 
-restartBtn.onclick = () => {
+restartBtn.onclick = function(){
 
 location.reload();
 
 };
 
-playAgainBtn.onclick = () => {
+playAgainBtn.onclick = function(){
 
 location.reload();
 
@@ -71,10 +68,8 @@ player.vy += gravity;
 player.y += player.vy;
 
 if(player.y >= 300){
-
 player.y = 300;
 player.jump = false;
-
 }
 
 obstacle.x -= 8;
@@ -121,14 +116,12 @@ playerGradient.addColorStop(0,"#8b5cf6");
 playerGradient.addColorStop(1,"#38bdf8");
 
 ctx.fillStyle = playerGradient;
-
 ctx.fillRect(player.x,player.y,player.width,player.height);
 
 ctx.shadowColor="#38bdf8";
 ctx.shadowBlur=15;
 
 ctx.fillStyle="#38bdf8";
-
 ctx.fillRect(obstacle.x,obstacle.y,obstacle.width,obstacle.height);
 
 ctx.shadowBlur=0;
