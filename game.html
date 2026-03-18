@@ -1,53 +1,33 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AntiGravity Runner</title>
-
+<title>Game</title>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
 
-<div class="container">
+<h2>Score: <span id="score">0</span></h2>
 
-<h1 class="title">AntiGravity Runner</h1>
+<button onclick="goHome()">Home</button> <button onclick="pauseGame()" id="pauseBtn">Pause</button> <button onclick="restartGame()">Restart</button>
 
-<div class="uiBar">
-<button id="homeBtn">Home</button>
-<button id="pauseBtn">Pause</button>
-<button id="restartBtn">Restart</button>
+<br><br>
 
-<div class="scoreBoard">
-Score: <span id="score">0</span>
-</div>
-</div>
+<canvas id="gameCanvas" width="800" height="300"></canvas>
 
-<canvas id="gameCanvas" width="1000" height="400"></canvas>
-
-</div>
-
-<div id="gameOverScreen" class="gameOver">
+<div id="over" style="display:none;">
 <h2>Game Over</h2>
-<p>Score: <span id="finalScore"></span></p>
-<p>High Score: <span id="highScore"></span></p>
-<button id="playAgain">Play Again</button>
-<button onclick="goHome()">Home</button>
+<button onclick="restartGame()">Play Again</button>
 </div>
+
+<script src="game.js"></script>
 
 <script>
 function goHome(){
 window.location.href="index.html";
 }
 </script>
-
-<script src="game.js"></script>
 
 </body>
 </html>
