@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>AntiGravity Runner</title>
-
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
 
-<div class="homeContainer">
+<div class="home">
 
-<h1 class="title">AntiGravity Runner</h1>
+<h1>AntiGravity Runner</h1>
 
-<p class="subtitle">Defy gravity. Survive the longest.</p>
+<button onclick="startGame()">PLAY</button>
 
-<button class="playButton" onclick="startGame()">PLAY</button>
-
-<p class="highScoreText">
-High Score: <span id="homeHighScore">0</span>
-</p>
+<p>High Score: <span id="high">0</span></p>
 
 </div>
 
 <script>
-
 function startGame(){
 window.location.href = "game.html";
 }
 
-let savedScore = localStorage.getItem("highscore") || 0;
-document.getElementById("homeHighScore").innerText = savedScore;
-
+let h = localStorage.getItem("highscore") || 0;
+document.getElementById("high").innerText = h;
 </script>
 
 </body>
